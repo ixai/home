@@ -2,15 +2,9 @@
 
 let inherit (inputs) try;
 in {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "ixai";
   home.homeDirectory = "/home/ixai";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
@@ -23,62 +17,82 @@ in {
     pkgs.jq
     pkgs.ripgrep
     pkgs.curl
-    pkgs.fzf
     pkgs.ruby
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
   ] ++ [try.packages.${system}.default];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
+  home.file = {};
 
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/ixai/etc/profile.d/hm-session-vars.sh
-  #
   home.sessionVariables = {
     EDITOR = "nvim";
+    VISUAL = "nvim";
+
+    LC_ALL="en_US.UTF-8";
+    LANG="en_US.UTF-8";
+
+    ANSIBLE_NOCOWS="1";
+    HOMEBREW_NO_ANALYTICS="1";
+    ZSH_DISABLE_COMPFIX="1";
+    npm_config_prefix="$HOME/.local";
   };
 
-  # Let Home Manager install and manage itself.
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+  programs.fzf.enable = true;
   programs.home-manager.enable = true;
-  programs.zsh.enable = true;
   programs.neovim.enable = true;
+  programs.starship.enable = true;
+  programs.zoxide.enable = true;
+  xdg.enable = true;
+
+  programs.zsh = {
+    enable = true;
+
+    defaultKeymap = "viins";
+    setOptions = ["EXTENDED_GLOB"];
+    dotDir = "${config.xdg.configHome}/zsh";
+    initContent = ''
+        unsetopt beep
+        zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+        eval "$(try init ~/src/tries)"
+    '';
+
+    profileExtra = ''
+        if uwsm check may-start && uwsm select; then
+            exec uwsm start default
+        fi
+    '';
+
+    history = {
+        path = "$ZDOTDIR/.zhistory";
+        size = 10000;
+        save = 20000;
+    };
+
+    antidote = {
+      enable = true;
+      plugins = [''
+        getantidote/use-omz
+        ohmyzsh/ohmyzsh path:lib
+        ohmyzsh/ohmyzsh path:plugins/git
+        olets/zsh-abbr
+        olets/zsh-autosuggestions-abbreviations-strategy
+        zsh-users/zsh-autosuggestions
+      ''];
+    };
+
+    shellAliases = {
+        docker-rmall-containers = "docker rm $(docker ps -a -q)";
+        docker-rmall-images = "docker rmi -f $(docker images -q)";
+        docker-stopall = "docker stop $(docker ps -a -q)";
+        vim = "nvim";
+    };
+  };
+
   programs.git = {
     enable = true;
     settings.user.name = "Ixai Lanzagorta";
