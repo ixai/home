@@ -18,12 +18,13 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    pkgs.curl
+    pkgs.gh
     pkgs.htop
     pkgs.jq
-    pkgs.ripgrep
-    pkgs.curl
-    pkgs.ruby
     pkgs.nixfmt-tree
+    pkgs.ripgrep
+    pkgs.ruby
   ]
   ++ [ try.packages.${system}.default ];
 
@@ -99,5 +100,14 @@ in
     enable = true;
     settings.user.name = "Ixai Lanzagorta";
     settings.user.email = "ixai.lanzagorta@gmail.com";
+
+    settings = {
+      credential."https://github.com".helper = [
+        "!${pkgs.gh}/bin/gh auth git-credential"
+      ];
+      credential."https://gist.github.com".helper = [
+        "!${pkgs.gh}/bin/gh auth git-credential"
+      ];
+    };
   };
 }
