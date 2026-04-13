@@ -44,7 +44,6 @@ in
     ANSIBLE_NOCOWS = "1";
     HOMEBREW_NO_ANALYTICS = "1";
     ZSH_DISABLE_COMPFIX = "1";
-    npm_config_prefix = "$HOME/.local";
   };
 
   programs.direnv.enable = true;
@@ -98,16 +97,12 @@ in
 
   programs.git = {
     enable = true;
-    settings.user.name = "Ixai Lanzagorta";
-    settings.user.email = "ixai.lanzagorta@gmail.com";
 
     settings = {
-      credential."https://github.com".helper = [
-        "!${pkgs.gh}/bin/gh auth git-credential"
-      ];
-      credential."https://gist.github.com".helper = [
-        "!${pkgs.gh}/bin/gh auth git-credential"
-      ];
+      user.name = "Ixai Lanzagorta";
+
+      init.defaultBranch = "main";
+      pager.branch = true;
     };
   };
 }
