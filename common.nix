@@ -22,6 +22,7 @@ in
     pkgs.gh
     pkgs.htop
     pkgs.jq
+    pkgs.marp-cli
     pkgs.nixfmt-tree
     pkgs.ripgrep
     pkgs.ruby
