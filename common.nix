@@ -53,6 +53,7 @@ in
   programs.home-manager.enable = true;
   programs.neovim.enable = true;
   programs.starship.enable = true;
+  programs.topgrade.enable = true;
   programs.zoxide.enable = true;
   xdg.enable = true;
 
