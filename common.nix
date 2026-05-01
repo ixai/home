@@ -26,6 +26,7 @@ in
     pkgs.nixfmt-tree
     pkgs.ripgrep
     pkgs.ruby
+    pkgs.shellcheck
   ]
   ++ [ try.packages.${system}.default ];
 
