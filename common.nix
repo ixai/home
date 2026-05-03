@@ -52,7 +52,6 @@ in
   programs.direnv.nix-direnv.enable = true;
   programs.fzf.enable = true;
   programs.home-manager.enable = true;
-  programs.neovim.enable = true;
   programs.starship.enable = true;
   programs.topgrade.enable = true;
   programs.zoxide.enable = true;
