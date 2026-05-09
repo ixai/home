@@ -117,9 +117,9 @@ in
     historyLimit = 10000;
     keyMode = "vi";
     mouse = true;
-    # newSession = true;
     prefix = "C-a";
     shell = "${pkgs.zsh}/bin/zsh";
+    terminal = "tmux-256color";
 
     plugins = with pkgs.tmuxPlugins; [
       {
@@ -133,6 +133,9 @@ in
     extraConfig = ''
       # set-option -ga terminal-overrides ",*:Tc"   # enable terminfo true colors
       set-option -g default-command "''${SHELL}"  # start a non-login shell
+
+      # Terminal capabilities
+      set-option -as terminal-features 'xterm-ghostty:RGB'    # advertise true color support to tmux
 
       # Extended keys
       set-option -g extended-keys on                          # extended keys (ctrl+enter, shift+enter, ...)
