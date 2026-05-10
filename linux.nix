@@ -48,4 +48,12 @@ in
     defaultCacheTtl = 1800;
     enableSshSupport = true;
   };
+
+  services.ollama = {
+    enable = true;
+    acceleration = "rocm";
+    environmentVariables = {
+      ROCR_VISIBLE_DEVICES = "1";
+    };
+  };
 }
