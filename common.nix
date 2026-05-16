@@ -32,6 +32,7 @@ in
     pkgs.ripgrep
     pkgs.ruby
     pkgs.shellcheck
+    pkgs.uv
   ]
   ++ [ try.packages.${system}.default ];
 
