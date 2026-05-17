@@ -7,7 +7,7 @@
 }:
 
 let
-  inherit (inputs) try;
+  inherit (inputs) niri;
 in
 {
   home.username = "ixai";
@@ -16,6 +16,8 @@ in
   home.sessionVariables = {
     npm_config_prefix = "$HOME/.local";
   };
+
+  home.packages = [ niri.packages.${system}.default ];
 
   programs.zsh = {
     initContent = ''
