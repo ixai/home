@@ -53,7 +53,7 @@ in
 
   services.ollama = {
     enable = true;
-    acceleration = "rocm";
+    # acceleration = "rocm";
     environmentVariables = {
       ROCR_VISIBLE_DEVICES = "1";
     };
