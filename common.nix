@@ -11,7 +11,12 @@ let
 in
 {
   nixpkgs.config.allowUnfreePredicate = (
-    pkg: builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) [ "1password-cli" ]
+    pkg:
+    builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) [
+      "1password"
+      "1password-cli"
+      "1password-gui"
+    ]
   );
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
@@ -21,7 +26,9 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    pkgs._1password
     pkgs._1password-cli
+    pkgs._1password-gui
     pkgs.ast-grep
     pkgs.curl
     pkgs.gh
