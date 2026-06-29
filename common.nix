@@ -144,10 +144,11 @@ in
     ];
 
     extraConfig = ''
-      # set-option -ga terminal-overrides ",*:Tc"   # enable terminfo true colors
       set-option -g default-command "''${SHELL}"  # start a non-login shell
+      set-option -g detach-on-destroy no-detached # switch session if available
 
       # Terminal capabilities
+      # set-option -ga terminal-overrides ",*:Tc"   # enable terminfo true colors
       set-option -as terminal-features 'xterm-ghostty:RGB'    # advertise true color support to tmux
 
       # Extended keys
