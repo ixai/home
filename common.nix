@@ -59,6 +59,7 @@ in
     ANSIBLE_NOCOWS = "1";
     HOMEBREW_NO_ANALYTICS = "1";
     ZSH_DISABLE_COMPFIX = "1";
+    MIRRORD_CHECK_VERSION = "false";
   };
 
   programs.direnv.enable = true;
