@@ -184,7 +184,7 @@ in
     enableZshIntegration = true;
 
     settings = {
-      command = ''${pkgs.zsh}/bin/zsh -c "${pkgs.tmux}/bin/tmux new-session -A -s ghostty"'';
+      command = ''${pkgs.zsh}/bin/zsh -c "${pkgs.tmux}/bin/tmux new-session"'';
       cursor-style = "block";
       fullscreen = true;
       keybind = "shift+enter=text:\\n";
