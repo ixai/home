@@ -27,6 +27,7 @@ in
     pkgs._1password-cli
     pkgs.ast-grep
     pkgs.curl
+    pkgs.difftastic
     pkgs.gh
     pkgs.htop
     pkgs.jq
