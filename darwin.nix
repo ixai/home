@@ -17,6 +17,8 @@ in
     "/Users/ixai/Library/Application Support/JetBrains/Toolbox/scripts"
   ];
 
+  programs.btop.enable = true;
+
   programs.zsh = {
     shellAliases = {
       code = ''open -a "Visual Studio Code"'';
