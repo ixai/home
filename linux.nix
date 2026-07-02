@@ -27,7 +27,11 @@ in
   home.packages = [
     niri.packages.${system}.default
     pkgs._1password-gui
+    pkgs.keybase-gui
   ];
+
+  services.keybase.enable = true;
+  services.kbfs.enable = true;
 
   programs.zsh = {
     initContent = ''
