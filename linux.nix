@@ -10,6 +10,13 @@ let
   inherit (inputs) niri;
 in
 {
+  nixpkgs.config.allowUnfreePredicate = (
+    pkg:
+    builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) [
+      "1password-gui"
+    ]
+  );
+
   home.username = "ixai";
   home.homeDirectory = "/home/ixai";
 
@@ -17,7 +24,10 @@ in
     npm_config_prefix = "$HOME/.local";
   };
 
-  home.packages = [ niri.packages.${system}.default ];
+  home.packages = [
+    niri.packages.${system}.default
+    pkgs._1password-gui
+  ];
 
   programs.zsh = {
     initContent = ''
