@@ -65,6 +65,7 @@ in
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.fzf.enable = true;
+  programs.gpg.enable = true;
   programs.home-manager.enable = true;
   programs.starship.enable = true;
   programs.topgrade.enable = true;

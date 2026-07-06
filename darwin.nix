@@ -51,7 +51,7 @@ in
       user.signingkey = "541E7CE6B327D35A89CEB87FF14546FABD44BF08";
 
       commit.gpgsign = true;
-      gpg.program = "/opt/homebrew/bin/gpg";
+      gpg.program = "${pkgs.gnupg}/bin/gpg";
 
       url."ssh://git@github.com/".insteadOf = "https://github.com/";
 
