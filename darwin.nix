@@ -24,6 +24,19 @@ in
   ];
 
   programs.btop.enable = true;
+  programs.claude-code = {
+    enable = true;
+    enableMcpIntegration = true;
+    lspServers = {
+      go = {
+        args = [ "serve" ];
+        command = [ "gopls" ];
+        extensionToLanguage = {
+          ".go" = "go";
+        };
+      };
+    };
+  };
 
   programs.zsh = {
     shellAliases = {
