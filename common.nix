@@ -35,6 +35,7 @@ in
     pkgs.marp-cli
     pkgs.nixfmt-tree
     pkgs.prettier
+    pkgs.fd
     pkgs.ripgrep
     pkgs.ruby
     pkgs.shellcheck
