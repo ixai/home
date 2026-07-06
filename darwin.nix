@@ -17,6 +17,12 @@ in
     "/Users/ixai/Library/Application Support/JetBrains/Toolbox/scripts"
   ];
 
+  home.packages = [
+    (pkgs.google-cloud-sdk.withExtraComponents [
+      pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin
+    ])
+  ];
+
   programs.btop.enable = true;
 
   programs.zsh = {
