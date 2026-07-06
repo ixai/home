@@ -30,12 +30,12 @@ in
     };
 
     initContent = ''
-      . ~/.ixai/dotixai/rc
-      . ~/.ixai/dotixai/workrc
+      . ~/.ixai/rc
+      . ~/.ixai/workrc
     '';
 
     envExtra = ''
-      . ~/.ixai/dotixai/env
+      . ~/.ixai/env
     '';
 
     profileExtra = ''
