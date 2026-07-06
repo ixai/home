@@ -110,4 +110,13 @@ in
       credential."https://dev.azure.com".useHttpPath = true;
     };
   };
+
+  programs.go = {
+    enable = true;
+    env = {
+      GOPRIVATE = [
+        "github.com/kouzoh"
+      ];
+    };
+  };
 }
