@@ -55,7 +55,7 @@ in
     LC_ALL = "en_US.UTF-8";
     LANG = "en_US.UTF-8";
 
-    LESS="-R --mouse --wheel-lines=3";
+    LESS = "-R --mouse --wheel-lines=3";
 
     ANSIBLE_NOCOWS = "1";
     HOMEBREW_NO_ANALYTICS = "1";
