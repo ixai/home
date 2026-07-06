@@ -48,7 +48,8 @@ in
 
     settings = {
       user.email = "ixai@mercari.com";
-      user.signingkey = "541E7CE6B327D35A89CEB87FF14546FABD44BF08";
+      # user.signingkey = "541E7CE6B327D35A89CEB87FF14546FABD44BF08";
+      user.signingkey = "32912C5BB2BC170E56441B9DBA670BB79FB259DB";
 
       commit.gpgsign = true;
       gpg.program = "${pkgs.gnupg}/bin/gpg";
