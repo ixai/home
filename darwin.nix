@@ -25,7 +25,10 @@ in
   ];
 
   programs.btop.enable = true;
-  programs.vscode.enable = true;
+  programs.vscode = {
+    enable = true;
+    mutableExtensionsDir = true;
+  };
 
   programs.claude-code = {
     enable = true;
