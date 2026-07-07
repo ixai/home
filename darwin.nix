@@ -24,6 +24,8 @@ in
   ];
 
   programs.btop.enable = true;
+  programs.vscode.enable = true;
+
   programs.claude-code = {
     enable = true;
     enableMcpIntegration = true;

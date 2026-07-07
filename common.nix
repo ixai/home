@@ -15,6 +15,7 @@ in
     builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) [
       "1password-cli"
       "claude-code"
+      "vscode"
     ]
   );
   # You should not change this value, even if you update Home Manager. If you do
