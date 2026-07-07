@@ -197,4 +197,9 @@ in
       theme = "Catppuccin Frappe";
     };
   };
+
+  programs.pi-coding-agent = {
+    enable = true;
+    context = ./config/agents/AGENTS.md;
+  };
 }
