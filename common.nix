@@ -31,16 +31,17 @@ in
     pkgs.bat
     pkgs.curl
     pkgs.difftastic
+    pkgs.fd
     pkgs.gh
     pkgs.htop
     pkgs.jq
     pkgs.marp-cli
     pkgs.nixfmt-tree
     pkgs.prettier
-    pkgs.fd
     pkgs.ripgrep
     pkgs.ruby
     pkgs.shellcheck
+    pkgs.shfmt
     pkgs.uv
   ]
   ++ [ try.packages.${system}.default ];
