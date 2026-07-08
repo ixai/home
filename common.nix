@@ -28,6 +28,7 @@ in
   home.packages = [
     pkgs._1password-cli
     pkgs.ast-grep
+    pkgs.bat
     pkgs.curl
     pkgs.difftastic
     pkgs.gh
