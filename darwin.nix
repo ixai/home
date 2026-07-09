@@ -14,6 +14,7 @@ in
   home.homeDirectory = "/Users/ixai";
 
   home.sessionPath = [
+    "/Users/ixai/.cache/.bun/bin"
     "/Users/ixai/Library/Application Support/JetBrains/Toolbox/scripts"
   ];
 
@@ -27,6 +28,11 @@ in
 
   programs.btop.enable = true;
   programs.obsidian.enable = true;
+
+  programs.bun = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 
   programs.vscode = {
     enable = true;
