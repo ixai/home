@@ -16,6 +16,7 @@ in
       "1password-cli"
       "claude-code"
       "obsidian"
+      "terraform"
       "vscode"
     ]
   );

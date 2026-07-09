@@ -22,6 +22,7 @@ in
       pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin
     ])
     pkgs.cue
+    pkgs.terraform
   ];
 
   programs.btop.enable = true;
