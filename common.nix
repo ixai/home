@@ -45,6 +45,7 @@ in
     pkgs.ruby
     pkgs.shellcheck
     pkgs.shfmt
+    pkgs.tombi
     pkgs.uv
   ]
   ++ [ try.packages.${system}.default ];
