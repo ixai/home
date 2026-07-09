@@ -6,7 +6,7 @@
 
 ## Etiquette
 
-- Never add yourself as a commit co-author, or identify yourself in PR descriptions.
+- NEVER add yourself as a commit co-author, or identify yourself in PR descriptions.
 - Always honor PR templates from the repository you're working on; you may add sections for emphasis.
 - Always create PRs as drafts; only mark them as "ready for review" on explicit user instructions.
 - Always write comments as quotes, and prefix the messages with a 🤖 emoticon.
@@ -18,7 +18,7 @@
 
 ## Guardrails
 
-- Never do destructive git operations (rebase, amend, push force, etc.) without explicit user instructions.
+- NEVER do destructive git operations (rebase, amend, push force, etc.) without explicit user instructions.
 
 ## Tooling
 
