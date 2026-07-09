@@ -25,6 +25,8 @@ in
   ];
 
   programs.btop.enable = true;
+  programs.obsidian.enable = true;
+
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = true;

@@ -15,6 +15,7 @@ in
     builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) [
       "1password-cli"
       "claude-code"
+      "obsidian"
       "vscode"
     ]
   );
