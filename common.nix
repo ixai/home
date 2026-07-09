@@ -34,6 +34,7 @@ in
     pkgs.curl
     pkgs.difftastic
     pkgs.fd
+    pkgs.gci
     pkgs.gh
     pkgs.htop
     pkgs.jq
