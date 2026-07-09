@@ -30,6 +30,7 @@ in
 
   programs.btop.enable = true;
   programs.obsidian.enable = true;
+  services.podman.enable = true;
 
   programs.bun = {
     enable = true;
