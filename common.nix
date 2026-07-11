@@ -26,6 +26,13 @@ in
   # release notes.
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
+  # Manage ~/.config/nix/nix.conf (user-level). Nix reads this file by
+  # default, so it takes effect alongside /etc/nix/nix.conf for this user.
+  # `nix.package` is required by the home-manager `nix` module to generate /
+  # validate the file; it is not added to home.packages automatically.
+  nix.package = pkgs.nix;
+  nix.settings = (import ./nix-common.nix).settings;
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
