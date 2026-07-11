@@ -1,5 +1,5 @@
 {
-  description = "ixai home manager";
+  description = "Nix setup (system-manager / home-manager)";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -7,6 +7,16 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    system-manager = {
+      url = "github:numtide/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-system-graphics = {
+      url = "github:soupglasses/nix-system-graphics";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -18,7 +28,13 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }@inputs:
+    {
+      nixpkgs,
+      home-manager,
+      system-manager,
+      nix-system-graphics,
+      ...
+    }@inputs:
     let
       mkHome =
         system: platform:
@@ -35,6 +51,14 @@
       homeConfigurations = {
         "ixai@personal" = mkHome "x86_64-linux" ./linux.nix;
         "ixai@work" = mkHome "aarch64-darwin" ./darwin.nix;
+      };
+
+      systemConfigs.default = system-manager.lib.makeSystemConfig {
+        modules = [
+          { nix.settings.experimental-features = "nix-commands flakes"; }
+          nix-system-graphics.systemModules.default
+          ./system.nix
+        ];
       };
     };
 }
