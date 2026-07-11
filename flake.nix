@@ -1,30 +1,29 @@
 {
   description = "Nix setup (system-manager / home-manager)";
 
+  # Every third-party input pins its *own* nixpkgs in its flake.lock by default.
+  # `inputs.nixpkgs.follows = "nixpkgs"` overrides that so they all share this
+  # flake's top-level nixpkgs — keeping package versions in sync across
+  # home-manager and system-manager.
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # --- tools ---
     try.url = "github:tobi/try";
+    try.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    niri.url = "github:niri-wm/niri";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
 
-    system-manager = {
-      url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # --- module systems ---
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-system-graphics = {
-      url = "github:soupglasses/nix-system-graphics";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    system-manager.url = "github:numtide/system-manager";
+    system-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    niri = {
-      url = "github:niri-wm/niri";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "";
-    };
+    nix-system-graphics.url = "github:soupglasses/nix-system-graphics";
+    nix-system-graphics.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -55,7 +54,6 @@
 
       systemConfigs.default = system-manager.lib.makeSystemConfig {
         modules = [
-          { nix.settings.experimental-features = "nix-commands flakes"; }
           nix-system-graphics.systemModules.default
           ./system.nix
         ];
