@@ -72,6 +72,7 @@ in
     MIRRORD_CHECK_VERSION = "false";
   };
 
+  programs.chromium.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.fzf.enable = true;
