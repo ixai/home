@@ -24,6 +24,7 @@ in
     ])
     pkgs.cue
     pkgs.kubectx
+    pkgs.grpcurl
     pkgs.mirrord
     pkgs.terraform
   ];
