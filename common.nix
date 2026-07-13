@@ -46,6 +46,7 @@ in
     pkgs.gci
     pkgs.gh
     pkgs.htop
+    pkgs.httpie
     pkgs.jq
     pkgs.marp-cli
     pkgs.nixfmt-tree
