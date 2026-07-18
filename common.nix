@@ -98,7 +98,6 @@ in
         # Disable updates for nix-managed binaries
         disable = [
           "tmux"
-          "pi"
           "uv"
           "claude_code"
         ];
@@ -235,6 +234,7 @@ in
 
   programs.pi-coding-agent = {
     enable = true;
+    package = null;
     context = ./config/agents/AGENTS.md;
   };
 
