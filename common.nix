@@ -15,6 +15,7 @@ in
     builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) [
       "1password"
       "1password-cli"
+      "1password-gui"
       "claude-code"
       "obsidian"
       "terraform"

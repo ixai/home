@@ -10,13 +10,6 @@ let
   inherit (inputs) niri;
 in
 {
-  nixpkgs.config.allowUnfreePredicate = (
-    pkg:
-    builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) [
-      "1password-gui"
-    ]
-  );
-
   home.username = "ixai";
   home.homeDirectory = "/home/ixai";
 
