@@ -48,7 +48,7 @@
     in
     {
       homeConfigurations = {
-        "ixai@personal" = mkHome "x86_64-linux" ./linux.nix;
+        "ixai@ninsun" = mkHome "x86_64-linux" ./linux.nix;
         "ixai@work" = mkHome "aarch64-darwin" ./darwin.nix;
       };
 
