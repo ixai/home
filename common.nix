@@ -94,18 +94,7 @@ in
 
     settings = {
       misc = {
-        # We're fully on flakes (no `nix-channel`), so the legacy `nix`
-        # step is a no-op — use the `home_manager` step below and the
-        # `Update flake inputs` custom command to drive updates.
-        #
-        # The rest are steps whose binaries live in the read-only Nix
-        # store (installed via home-manager), so their bundled
-        # self-updaters either fail outright or get clobbered on the
-        # next `home-manager switch`:
-        #   - tmux         → programs.tmux (Nix path)
-        #   - pi           → programs.pi-coding-agent (Nix path)
-        #   - uv           → home.packages pkgs.uv (Nix path)
-        #   - claude_code  → programs.claude-code (Nix path)
+        # Disable updates for nix-managed binaries
         disable = [
           "tmux"
           "pi"
@@ -115,12 +104,6 @@ in
 
         cleanup = true;
       };
-
-      # Update flake.lock before the `home_manager` step rebuilds. Order is
-      # not guaranteed by topgrade, so on first runs you may need to invoke
-      # `topgrade --only "flake-inputs"` once, then run normally.
-      commands."flake-inputs" =
-        "cd ${config.xdg.configHome}/home-manager && nix flake update --commit-lock-file";
     };
   };
   programs.zoxide.enable = true;
