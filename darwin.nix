@@ -32,11 +32,6 @@ in
   programs.obsidian.enable = true;
   services.podman.enable = true;
 
-  programs.bun = {
-    enable = true;
-    enableGitIntegration = true;
-  };
-
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = true;

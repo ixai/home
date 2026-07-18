@@ -63,6 +63,7 @@ in
 
   home.sessionPath = [
     "$HOME/.local/bin"
+    "$HOME/.cache/.bun/bin"
   ];
 
   home.sessionVariables = {
@@ -108,6 +109,11 @@ in
   };
   programs.zoxide.enable = true;
   xdg.enable = true;
+
+  programs.bun = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 
   programs.zsh = {
     enable = true;
