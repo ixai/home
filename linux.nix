@@ -27,6 +27,7 @@ in
   home.packages = [
     niri.packages.${system}.default
     pkgs._1password-gui
+    pkgs.bun
     pkgs.keybase-gui
   ];
 
