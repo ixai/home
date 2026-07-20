@@ -87,7 +87,6 @@ in
     DISABLE_AUTOUPDATER = "1";
   };
 
-  programs.chromium.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.fzf.enable = true;

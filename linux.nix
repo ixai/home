@@ -23,6 +23,8 @@ in
     pkgs.keybase-gui
   ];
 
+  programs.chromium.enable = true;
+
   services.keybase.enable = true;
   services.kbfs.enable = true;
 
