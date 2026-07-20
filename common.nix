@@ -48,6 +48,7 @@ in
     pkgs.htop
     pkgs.httpie
     pkgs.jq
+    pkgs.yq-go
     pkgs.marp-cli
     pkgs.nixfmt-tree
     pkgs.prettier
