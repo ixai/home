@@ -26,3 +26,13 @@
 - Prefer the `gh` command line to interact with GitHub.
 - Prefer the `acli` command line to interact with Jira.
 - Prefer the `pup` command line to interact with DataDog.
+
+## Preferences
+
+### Shell scripts
+
+- Prefer long-form options when available (`--query` instead of `-Q`).
+
+### Python
+
+- Prefer `uv` to manage python environments and execute python scripts.
