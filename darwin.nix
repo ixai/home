@@ -22,11 +22,14 @@ in
     (pkgs.google-cloud-sdk.withExtraComponents [
       pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin
     ])
+    pkgs.api-linter
     pkgs.cue
     pkgs.kubectx
     pkgs.grpcurl
     pkgs.mirrord
     pkgs.terraform
+    pkgs.protobuf
+    pkgs.protoc-gen-go
   ];
 
   programs.btop.enable = true;
