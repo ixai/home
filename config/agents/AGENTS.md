@@ -9,16 +9,12 @@
 - NEVER add yourself as a commit co-author, or identify yourself in PR descriptions.
 - Always honor PR templates from the repository you're working on; you may add sections for emphasis.
 - Always create PRs as drafts; only mark them as "ready for review" on explicit user instructions.
-- Always write comments as quotes, and prefix the messages with a 🤖 emoticon.
+- Always write comments as quotes, and sign the messages with a 🤖 emoticon.
 
 ```
-🤖
 > This is an example comment.
+> -- 🤖
 ```
-
-## Guardrails
-
-- NEVER do destructive git operations (rebase, amend, push force, etc.) without explicit user instructions.
 
 ## Tooling
 
@@ -36,3 +32,8 @@
 ### Python
 
 - Prefer `uv` to manage python environments and execute python scripts.
+
+### Git
+
+- NEVER do destructive git operations (rebase, amend, push force, etc.) without explicit user instructions.
+- NEVER do `git add -A`, be intentional about the files that you're adding to a commit.
