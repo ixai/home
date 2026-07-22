@@ -32,6 +32,12 @@ in
     pkgs.protoc-gen-go
   ];
 
+  # Leave macOS system updates (softwareupdate) and App Store apps out of topgrade
+  programs.topgrade.settings.misc.disable = [
+    "system"
+    "mas"
+  ];
+
   programs.btop.enable = true;
   programs.obsidian.enable = true;
   services.podman.enable = true;

@@ -13,7 +13,7 @@
 
 ```
 > This is an example comment.
-> -- 🤖
+> — 🤖
 ```
 
 ## Tooling
