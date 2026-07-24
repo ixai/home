@@ -24,12 +24,13 @@ in
     ])
     pkgs.api-linter
     pkgs.cue
-    pkgs.kubectx
     pkgs.grpcurl
+    pkgs.kubectx
     pkgs.mirrord
-    pkgs.terraform
     pkgs.protobuf
     pkgs.protoc-gen-go
+    pkgs.terraform
+    pkgs.tree
   ];
 
   # Leave macOS system updates (softwareupdate) and App Store apps out of topgrade
