@@ -3,6 +3,7 @@
   pkgs,
   inputs,
   system,
+  treefmt,
   ...
 }:
 
@@ -48,10 +49,7 @@ in
     pkgs.htop
     pkgs.httpie
     pkgs.jq
-    pkgs.yq-go
-    pkgs.xq
     pkgs.marp-cli
-    pkgs.nixfmt-tree
     pkgs.prettier
     pkgs.ripgrep
     pkgs.ruby
@@ -59,6 +57,9 @@ in
     pkgs.shfmt
     pkgs.tombi
     pkgs.uv
+    pkgs.xq
+    pkgs.yq-go
+    treefmt
   ]
   ++ [ try.packages.${system}.default ];
 

@@ -12,6 +12,9 @@
     try.url = "github:tobi/try";
     try.inputs.nixpkgs.follows = "nixpkgs";
 
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     niri.url = "github:niri-wm/niri";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -32,9 +35,14 @@
       home-manager,
       system-manager,
       nix-system-graphics,
+      treefmt-nix,
       ...
     }@inputs:
     let
+      # Per-system treefmt evaluation. `.config.build.wrapper` is the runnable
+      # `treefmt` package; it also backs the `nix fmt` formatter output below.
+      treefmtEval = system: treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} ./treefmt.nix;
+
       mkHome =
         system: platform:
         home-manager.lib.homeManagerConfiguration {
@@ -43,13 +51,21 @@
             ./common.nix
             platform
           ];
-          extraSpecialArgs = { inherit inputs system; };
+          extraSpecialArgs = {
+            inherit inputs system;
+            treefmt = (treefmtEval system).config.build.wrapper;
+          };
         };
     in
     {
       homeConfigurations = {
         "ixai@ninsun" = mkHome "x86_64-linux" ./linux.nix;
         "ixai@D6R6PWWX1F" = mkHome "aarch64-darwin" ./darwin.nix;
+      };
+
+      formatter = {
+        "x86_64-linux" = (treefmtEval "x86_64-linux").config.build.wrapper;
+        "aarch64-darwin" = (treefmtEval "aarch64-darwin").config.build.wrapper;
       };
 
       systemConfigs.default = system-manager.lib.makeSystemConfig {
