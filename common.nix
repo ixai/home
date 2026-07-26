@@ -13,7 +13,6 @@ in
   imports = [
     ./bun.nix
     ./claude-code.nix
-    ./gh.nix
     ./ghostty.nix
     ./git.nix
     ./pi-coding-agent.nix
@@ -99,6 +98,7 @@ in
   programs.direnv.nix-direnv.enable = true;
   programs.fd.enable = true;
   programs.fzf.enable = true;
+  programs.gh.enable = true;
   programs.gpg.enable = true;
   programs.home-manager.enable = true;
   programs.htop.enable = true;
