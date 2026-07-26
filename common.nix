@@ -13,6 +13,7 @@ in
   imports = [
     ./bun.nix
     ./claude-code.nix
+    ./difftastic.nix
     ./ghostty.nix
     ./git.nix
     ./pi-coding-agent.nix
@@ -93,7 +94,6 @@ in
   };
 
   programs.bat.enable = true;
-  programs.difftastic.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.fd.enable = true;
