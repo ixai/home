@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   system,
@@ -11,6 +10,17 @@ let
   inherit (inputs) try;
 in
 {
+  imports = [
+    ./bun.nix
+    ./claude-code.nix
+    ./ghostty.nix
+    ./git.nix
+    ./pi-coding-agent.nix
+    ./tmux.nix
+    ./topgrade.nix
+    ./zsh.nix
+  ];
+
   nixpkgs.config.allowUnfreePredicate = (
     pkg:
     builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) [
@@ -45,6 +55,7 @@ in
     pkgs.difftastic
     pkgs.fd
     pkgs.gci
+    pkgs.gopls
     pkgs.gh
     pkgs.htop
     pkgs.httpie
@@ -94,172 +105,6 @@ in
   programs.gpg.enable = true;
   programs.home-manager.enable = true;
   programs.starship.enable = true;
-  programs.topgrade = {
-    enable = true;
-
-    settings = {
-      misc = {
-        # Disable updates for nix-managed binaries
-        disable = [
-          "tmux"
-          "uv"
-          "claude_code"
-        ];
-
-        cleanup = true;
-      };
-    };
-  };
   programs.zoxide.enable = true;
   xdg.enable = true;
-
-  programs.bun = {
-    enable = true;
-    enableGitIntegration = true;
-  };
-
-  programs.zsh = {
-    enable = true;
-
-    defaultKeymap = "viins";
-    setOptions = [ "EXTENDED_GLOB" ];
-    dotDir = "${config.xdg.configHome}/zsh";
-    initContent = ''
-      unsetopt beep
-      zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
-      eval "$(try init ~/src/tries)"
-    '';
-
-    history = {
-      path = "$ZDOTDIR/.zhistory";
-      size = 10000;
-      save = 20000;
-    };
-
-    antidote = {
-      enable = true;
-      plugins = [
-        ''
-          getantidote/use-omz
-          ohmyzsh/ohmyzsh path:lib
-          ohmyzsh/ohmyzsh path:plugins/git
-          olets/zsh-abbr
-          olets/zsh-autosuggestions-abbreviations-strategy
-          zsh-users/zsh-autosuggestions
-        ''
-      ];
-    };
-
-    shellAliases = {
-      docker-rmall-containers = "docker rm $(docker ps -a -q)";
-      docker-rmall-images = "docker rmi -f $(docker images -q)";
-      docker-stopall = "docker stop $(docker ps -a -q)";
-      vim = "nvim";
-    };
-  };
-
-  programs.git = {
-    enable = true;
-
-    settings = {
-      user.name = "Ixai Lanzagorta";
-
-      init.defaultBranch = "main";
-      pager.branch = true;
-    };
-  };
-
-  programs.tmux = {
-    enable = true;
-
-    baseIndex = 1;
-    clock24 = true;
-    historyLimit = 10000;
-    keyMode = "vi";
-    mouse = true;
-    prefix = "C-a";
-    shell = "${pkgs.zsh}/bin/zsh";
-    terminal = "tmux-256color";
-
-    plugins = with pkgs.tmuxPlugins; [
-      {
-        plugin = catppuccin;
-        extraConfig = "set -g @catppuccin_flavor 'frappe'";
-      }
-      sensible
-      yank
-    ];
-
-    extraConfig = ''
-      set-option -g default-command "''${SHELL}"  # start a non-login shell
-      set-option -g detach-on-destroy no-detached # switch session if available
-
-      # Terminal capabilities
-      # set-option -ga terminal-overrides ",*:Tc"   # enable terminfo true colors
-      set-option -as terminal-features 'xterm-ghostty:RGB'    # advertise true color support to tmux
-
-      # Extended keys
-      set-option -g extended-keys on                          # extended keys (ctrl+enter, shift+enter, ...)
-      set-option -g extended-keys-format csi-u                # kitty keyboard protocol
-      set-option -as terminal-features 'xterm-ghostty:csi-u'  # Ghostty speaks Kitty natively
-
-      # Windows
-      bind-key c new-window -c "#{pane_current_path}" # retain cwd on new window
-
-      # Panes
-      bind-key C-l split-window -h -c "#{pane_current_path}"  # split pane right
-      bind-key C-j split-window -v -c "#{pane_current_path}"  # split pane down
-
-      bind-key -n C-S-h select-pane -L -Z
-      bind-key -n C-S-j select-pane -D -Z
-      bind-key -n C-S-k select-pane -U -Z
-      bind-key -n C-S-l select-pane -R -Z
-
-      bind-key -n C-S-Left resize-pane -L
-      bind-key -n C-S-Down resize-pane -D
-      bind-key -n C-S-Up resize-pane -U
-      bind-key -n C-S-Right resize-pane -R
-
-      bind-key -n C-S-\; resize-pane -Z
-    '';
-  };
-
-  programs.ghostty = {
-    enable = true;
-    package = if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
-
-    enableZshIntegration = true;
-
-    settings = {
-      command = ''${pkgs.zsh}/bin/zsh -c "${pkgs.tmux}/bin/tmux new-session"'';
-      cursor-style = "block";
-      fullscreen = true;
-      keybind = "shift+enter=text:\\n";
-      mouse-hide-while-typing = true;
-      shell-integration = "zsh";
-      theme = "Catppuccin Frappe";
-    };
-  };
-
-  programs.pi-coding-agent = {
-    enable = true;
-    package = null;
-    context = ./config/agents/AGENTS.md;
-  };
-
-  programs.claude-code = {
-    enable = true;
-    enableMcpIntegration = true;
-    lspServers = {
-      go = {
-        args = [ "serve" ];
-        command = [ "gopls" ];
-        extensionToLanguage = {
-          ".go" = "go";
-        };
-      };
-    };
-
-    context = ./config/agents/AGENTS.md;
-  };
 }
