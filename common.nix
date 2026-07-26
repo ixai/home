@@ -13,6 +13,7 @@ in
   imports = [
     ./bun.nix
     ./claude-code.nix
+    ./gh.nix
     ./ghostty.nix
     ./git.nix
     ./pi-coding-agent.nix
@@ -50,19 +51,12 @@ in
   home.packages = [
     pkgs._1password-cli
     pkgs.ast-grep
-    pkgs.bat
     pkgs.curl
-    pkgs.difftastic
-    pkgs.fd
     pkgs.gci
     pkgs.gopls
-    pkgs.gh
-    pkgs.htop
     pkgs.httpie
-    pkgs.jq
     pkgs.marp-cli
     pkgs.prettier
-    pkgs.ripgrep
     pkgs.ruby
     pkgs.shellcheck
     pkgs.shfmt
@@ -99,11 +93,17 @@ in
     DISABLE_AUTOUPDATER = "1";
   };
 
+  programs.bat.enable = true;
+  programs.difftastic.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+  programs.fd.enable = true;
   programs.fzf.enable = true;
   programs.gpg.enable = true;
   programs.home-manager.enable = true;
+  programs.htop.enable = true;
+  programs.jq.enable = true;
+  programs.ripgrep.enable = true;
   programs.starship.enable = true;
   programs.zoxide.enable = true;
   xdg.enable = true;
