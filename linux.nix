@@ -34,6 +34,7 @@ in
     '';
 
     profileExtra = ''
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
       if uwsm check may-start && uwsm select; then
           exec uwsm start default
       fi

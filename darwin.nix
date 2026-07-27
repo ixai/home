@@ -59,6 +59,7 @@ in
     };
 
     initContent = ''
+      eval "$(/opt/homebrew/bin/brew shellenv zsh)"
       . ~/.ixai/rc
       . ~/.ixai/workrc
     '';
