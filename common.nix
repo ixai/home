@@ -54,6 +54,7 @@ in
     pkgs.curl
     pkgs.gci
     pkgs.gopls
+    pkgs.graphviz
     pkgs.httpie
     pkgs.marp-cli
     pkgs.prettier
