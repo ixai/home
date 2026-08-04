@@ -1,15 +1,16 @@
-## Behavior & style
+## Behavior and style
 
-- Be pragmatic, clear, and rigorous.
-- Write in a concise, actionable manner; minimal fluff.
-- Explain decisions and tradeoffs when needed.
+- Work in a pragmatic way. Be clear and rigorous.
+- Write in a concise way. Give only the information that helps the task. Do not add extra words.
+- Explain your decisions. Explain the tradeoffs, when this is necessary.
+- Use Simplified Technical English (ASD-STE100) for all communication. This makes the text clear for all readers.
 
 ## Etiquette
 
-- NEVER add yourself as a commit co-author, or identify yourself in PR descriptions.
-- Always honor PR templates from the repository you're working on; you may add sections for emphasis.
-- Always create PRs as drafts; only mark them as "ready for review" on explicit user instructions.
-- Always write comments as quotes, and sign the messages with a 🤖 emoticon.
+- Do not add yourself as a commit co-author. Do not identify yourself in PR descriptions.
+- You must follow the PR templates from the repository. You can add sections to give emphasis.
+- You must create PRs as drafts. You can set a PR to "ready for review" only when the user gives this instruction.
+- Write comments as quotes. Sign each comment with a 🤖 symbol.
 
 ```
 > This is an example comment.
@@ -18,25 +19,26 @@
 
 ## Tooling
 
-- Prefer the `fd` and `rg` commands for file search.
-- Prefer the `gh` command line to interact with GitHub.
-- Prefer the `acli` command line to interact with Jira.
-- Prefer the `pup` command line to interact with DataDog.
+- Use the `fd` and `rg` commands to search for files.
+- Use the `gh` command line tool to work with GitHub.
+- Use the `acli` command line tool to work with Jira.
+- Use the `pup` command line tool to work with DataDog.
 
 ## Preferences
 
 ### Shell scripts
 
-- Prefer long-form options when a tool provides them (e.g. `--query` instead of `-Q`, `--silent` instead of `-s`) — they are self-documenting and read more clearly in review. Reasons not to:
-  - No long-form option exists — e.g. `grpcurl` exposes only single-dash flags like `-plaintext` and `-d`.
-  - The long form isn't portable across the environments the script runs in — notably coreutils/BSD differences between Linux and macOS (e.g. `grep --invert-match` is unavailable on stock macOS; use `grep -v`). Prefer the portable short form (or a POSIX-compatible alternative).
-- Give shell scripts a `.sh` extension and keep them `shfmt`- and `shellcheck`-clean.
+- Use the long-form option when a tool has one. Example: use `--query`, not `-Q`. Use `--silent`, not `-s`. Long-form options are easier to read in a review.
+  There are two exceptions to this rule:
+  - The tool has no long-form option. Example: `grpcurl` has only single-dash options, like `-plaintext` and `-d`.
+  - The long-form option does not work on all systems that run the script. Linux and macOS use different versions of the core utilities. Example: `grep --invert-match` does not work on standard macOS. Use `grep -v` instead. Use the short option, or an option that follows the POSIX standard.
+- Give each shell script the extension `.sh`. The script must pass `shfmt` and `shellcheck` with no errors.
 
 ### Python
 
-- Prefer `uv` to manage python environments and execute python scripts.
+- Use `uv` to manage Python environments and to run Python scripts.
 
 ### Git
 
-- NEVER do destructive git operations (rebase, amend, push force, etc.) without explicit user instructions.
-- NEVER do `git add -A`, be intentional about the files that you're adding to a commit.
+- Do not do destructive git operations, for example rebase, amend, or force push. Do these operations only when the user gives a direct instruction.
+- Do not use `git add -A`. Select the files for each commit with care.
