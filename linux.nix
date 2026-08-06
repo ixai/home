@@ -19,6 +19,7 @@ in
 
   home.packages = [
     niri.packages.${system}.default
+    pkgs._1password-cli
     pkgs._1password-gui
     pkgs.keybase-gui
   ];
