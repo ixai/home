@@ -24,6 +24,7 @@ in
     ])
     pkgs.api-linter
     pkgs.cue
+    pkgs.datadog-pup
     pkgs.grpcurl
     pkgs.kubectx
     pkgs.mirrord
