@@ -56,6 +56,7 @@ in
     pkgs.graphviz
     pkgs.httpie
     pkgs.marp-cli
+    pkgs.poppler-utils
     pkgs.prettier
     pkgs.ruby
     pkgs.shellcheck
