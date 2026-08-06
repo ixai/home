@@ -30,6 +30,7 @@ in
     pkgs.mirrord
     pkgs.protobuf
     pkgs.protoc-gen-go
+    pkgs.sql-formatter
     pkgs.terraform
     pkgs.tree
   ];
