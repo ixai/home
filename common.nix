@@ -58,6 +58,7 @@ in
     pkgs.graphviz
     pkgs.httpie
     pkgs.marp-cli
+    pkgs.playwright-driver.browsers
     pkgs.prettier
     pkgs.ruby
     pkgs.shellcheck
@@ -93,6 +94,9 @@ in
 
     # Disable Claude Code auto-updater so it doesn't override the nix-managed version
     DISABLE_AUTOUPDATER = "1";
+
+    PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+    PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
   };
 
   programs.direnv.enable = true;
