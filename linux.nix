@@ -6,10 +6,11 @@
   ...
 }:
 
-let
-  inherit (inputs) niri;
-in
 {
+  imports = [
+    ./niri.nix
+  ];
+
   home.username = "ixai";
   home.homeDirectory = "/home/ixai";
 
@@ -18,7 +19,6 @@ in
   };
 
   home.packages = [
-    niri.packages.${system}.default
     pkgs._1password-gui
     pkgs.keybase-gui
     pkgs.dos2unix
