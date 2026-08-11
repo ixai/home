@@ -75,5 +75,14 @@
           ./system.nix
         ];
       };
+
+      # Pins the system-manager CLI to the same input used to build
+      # `systemConfigs.default`, so the CLI and the module set that
+      # generated the config never drift apart. Run with:
+      #   nix run .#system-manager -- switch --flake .
+      apps.x86_64-linux.system-manager = {
+        type = "app";
+        program = "${system-manager.packages.x86_64-linux.default}/bin/system-manager";
+      };
     };
 }
