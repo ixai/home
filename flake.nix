@@ -69,6 +69,7 @@
       };
 
       systemConfigs.default = system-manager.lib.makeSystemConfig {
+        specialArgs = { inherit inputs; };
         modules = [
           nix-system-graphics.systemModules.default
           ./system.nix
