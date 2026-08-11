@@ -43,9 +43,10 @@
     environment = {
       # Packages that should be installed on a system
       systemPackages = with pkgs; [
-        btop # Beautiful system monitor
         bat # Modern 'cat' with syntax highlight
+        btop # Beautiful system monitor
         clinfo
+        qmk
       ];
 
       # Add directories and files to `/etc` and set their permissions

@@ -21,6 +21,7 @@ in
     niri.packages.${system}.default
     pkgs._1password-gui
     pkgs.keybase-gui
+    pkgs.dos2unix
   ];
 
   programs.chromium.enable = true;
