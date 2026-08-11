@@ -11,6 +11,7 @@ let
 in
 {
   imports = [
+    ./bat.nix
     ./bun.nix
     ./claude-code.nix
     ./difftastic.nix
@@ -94,7 +95,6 @@ in
     DISABLE_AUTOUPDATER = "1";
   };
 
-  programs.bat.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.fd.enable = true;

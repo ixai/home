@@ -15,7 +15,7 @@
     plugins = with pkgs.tmuxPlugins; [
       {
         plugin = catppuccin;
-        extraConfig = "set -g @catppuccin_flavor 'frappe'";
+        extraConfig = "set -g @catppuccin_flavor 'latte'";
       }
       sensible
       yank
