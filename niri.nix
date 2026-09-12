@@ -336,7 +336,7 @@
         }
         {
           window-rule = {
-            match._props.app-id = "firefox$";
+            match._props.app-id = "^(firefox|code-oss)$";
             open-maximized = true;
           };
         }
