@@ -16,6 +16,7 @@ in
     ./difftastic.nix
     ./ghostty.nix
     ./git.nix
+    ./hunk.nix
     ./pi-coding-agent.nix
     ./tmux.nix
     ./topgrade.nix
