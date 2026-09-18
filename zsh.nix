@@ -17,6 +17,30 @@
         unsetopt beep
         zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
         eval "$(try init ~/src/tries)"
+
+        wt() {
+          local name="$1" wt_path
+
+          wt_path=$(git worktree list --porcelain 2>/dev/null | awk -v name="$name" '
+            $1 == "worktree" { path = $2; if (name == "") { print path; exit } }
+            $1 == "branch" && name != "" && $2 == "refs/heads/" name { print path; exit }
+          ')
+
+          if [ -z "$wt_path" ]; then
+            if [ -z "$name" ]; then
+              echo "wt: not in a git repository" >&2
+            else
+              echo "wt: no worktree checked out for branch '$name'" >&2
+            fi
+            return 1
+          fi
+
+          if [ -z "$name" ]; then
+            cd "$wt_path" && echo "wt: moved to repository root ($wt_path)"
+          else
+            cd "$wt_path" && echo "wt: moved to '$name' ($wt_path)"
+          fi
+        }
       ''
     ];
 
