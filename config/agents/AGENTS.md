@@ -42,3 +42,8 @@
 
 - Do not do destructive git operations, for example rebase, amend, or force push. Do these operations only when the user gives a direct instruction.
 - Do not use `git add -A`. Select the files for each commit with care.
+
+### Code Comments
+
+- Do not frame comments at a point in time, or relative to a plan. Such statements go stale silently.
+- A comment may state a timeless invariant or reasoning. If a comment restates the code, delete it.
