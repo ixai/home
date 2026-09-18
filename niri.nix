@@ -273,7 +273,16 @@
         "Mod+Shift+E".quit = { };
         "Ctrl+Alt+Delete".quit = { };
 
-        "Mod+Shift+P".power-off-monitors = { };
+        "Mod+Shift+P" = {
+          _props.hotkey-overlay-title = "Open Power Menu: DankMaterialShell";
+          spawn = [
+            "dms"
+            "ipc"
+            "call"
+            "powermenu"
+            "toggle"
+          ];
+        };
       };
 
       # Repeated/parameterized top-level nodes (output, window-rule, include,
