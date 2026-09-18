@@ -1,5 +1,20 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  # system-manager's own nix/modules/upstream/nixpkgs/nix.nix hand-declares
+  # `nix.enable`/`nix.package` as a stand-in for the real nix-daemon module.
+  # Since nixpkgs commit 3a84c13b4 (2026-06-12), nixpkgs' own
+  # nixos/modules/config/nix.nix (imported below) declares the same two
+  # options directly, so the stand-in now collides with it ("option ...
+  # already declared"). Disable the now-redundant stand-in; its other config
+  # line (`environment.etc."nix/nix.conf".replaceExisting`) is reproduced
+  # below.
+  disabledModules = [ (inputs.system-manager + "/nix/modules/upstream/nixpkgs/nix.nix") ];
+
   config = {
     nixpkgs.hostPlatform = "x86_64-linux";
     system-manager.allowAnyDistro = true;
@@ -43,13 +58,16 @@
     environment = {
       # Packages that should be installed on a system
       systemPackages = with pkgs; [
-        btop # Beautiful system monitor
         bat # Modern 'cat' with syntax highlight
+        btop # Beautiful system monitor
         clinfo
+        qmk
       ];
 
       # Add directories and files to `/etc` and set their permissions
       etc = {
+        "nix/nix.conf".replaceExisting = true;
+
         # with_ownership = {
         #   text = ''
         #     This is just a test!

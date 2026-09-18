@@ -6,10 +6,13 @@
   ...
 }:
 
-let
-  inherit (inputs) niri;
-in
 {
+  imports = [
+    inputs.hermes-agent.homeManagerModules.default
+    ./hermes-agent.nix
+    ./niri.nix
+  ];
+
   home.username = "ixai";
   home.homeDirectory = "/home/ixai";
 
@@ -18,10 +21,10 @@ in
   };
 
   home.packages = [
-    niri.packages.${system}.default
     pkgs._1password-cli
     pkgs._1password-gui
-    pkgs.keybase-gui
+    # pkgs.keybase-gui
+    pkgs.dos2unix
   ];
 
   programs.chromium.enable = true;

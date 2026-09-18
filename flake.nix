@@ -12,6 +12,10 @@
     try.url = "github:tobi/try";
     try.inputs.nixpkgs.follows = "nixpkgs";
 
+    hermes-agent.url = "github:NousResearch/hermes-agent";
+    hermes-agent.inputs.nixpkgs.follows = "nixpkgs";
+    hermes-agent.inputs.home-manager.follows = "home-manager";
+
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -76,10 +80,20 @@
       };
 
       systemConfigs.default = system-manager.lib.makeSystemConfig {
+        specialArgs = { inherit inputs; };
         modules = [
           nix-system-graphics.systemModules.default
           ./system.nix
         ];
+      };
+
+      # Pins the system-manager CLI to the same input used to build
+      # `systemConfigs.default`, so the CLI and the module set that
+      # generated the config never drift apart. Run with:
+      #   nix run .#system-manager -- switch --flake .
+      apps.x86_64-linux.system-manager = {
+        type = "app";
+        program = "${system-manager.packages.x86_64-linux.default}/bin/system-manager";
       };
 
       darwinConfigurations."D6R6PWWX1F" = nix-darwin.lib.darwinSystem {

@@ -12,6 +12,7 @@ let
 in
 {
   imports = [
+    ./bat.nix
     ./bun.nix
     ./claude-code.nix
     ./difftastic.nix
@@ -60,6 +61,7 @@ in
     pkgs.graphviz
     pkgs.httpie
     pkgs.marp-cli
+    pkgs.playwright-driver.browsers
     pkgs.poppler-utils
     pkgs.prettier
     pkgs.ruby
@@ -96,9 +98,11 @@ in
 
     # Disable Claude Code auto-updater so it doesn't override the nix-managed version
     DISABLE_AUTOUPDATER = "1";
+
+    PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+    PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
   };
 
-  programs.bat.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.fd.enable = true;
