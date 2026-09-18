@@ -27,6 +27,9 @@
 
     nix-system-graphics.url = "github:soupglasses/nix-system-graphics";
     nix-system-graphics.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -34,6 +37,7 @@
       nixpkgs,
       home-manager,
       system-manager,
+      nix-darwin,
       nix-system-graphics,
       treefmt-nix,
       ...
@@ -43,6 +47,13 @@
       # `treefmt` package; it also backs the `nix fmt` formatter output below.
       treefmtEval = system: treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} ./treefmt.nix;
 
+      # The argument set every home-manager module in this flake is evaluated
+      # with, whether it is activated standalone or through nix-darwin.
+      homeArgs = system: {
+        inherit inputs system;
+        treefmt = (treefmtEval system).config.build.wrapper;
+      };
+
       mkHome =
         system: platform:
         home-manager.lib.homeManagerConfiguration {
@@ -51,16 +62,12 @@
             ./common.nix
             platform
           ];
-          extraSpecialArgs = {
-            inherit inputs system;
-            treefmt = (treefmtEval system).config.build.wrapper;
-          };
+          extraSpecialArgs = homeArgs system;
         };
     in
     {
       homeConfigurations = {
         "ixai@ninsun" = mkHome "x86_64-linux" ./linux.nix;
-        "ixai@D6R6PWWX1F" = mkHome "aarch64-darwin" ./darwin.nix;
       };
 
       formatter = {
@@ -72,6 +79,17 @@
         modules = [
           nix-system-graphics.systemModules.default
           ./system.nix
+        ];
+      };
+
+      darwinConfigurations."D6R6PWWX1F" = nix-darwin.lib.darwinSystem {
+        specialArgs = {
+          inherit inputs;
+          homeArgs = homeArgs "aarch64-darwin";
+        };
+        modules = [
+          home-manager.darwinModules.home-manager
+          ./nix-darwin.nix
         ];
       };
     };
