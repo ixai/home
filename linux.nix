@@ -8,6 +8,8 @@
 
 {
   imports = [
+    inputs.hermes-agent.homeManagerModules.default
+    ./hermes-agent.nix
     ./niri.nix
   ];
 

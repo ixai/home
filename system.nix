@@ -5,27 +5,6 @@
   ...
 }:
 {
-  # Stub option. Upstream nixpkgs' nixos/modules/config/nix.nix (which
-  # system-manager reuses for `nix.enable`) unconditionally sets
-  # `services.displayManager.hiddenUsers` to hide nix build users from login
-  # managers. system-manager does not import the module that declares
-  # `services.displayManager` (no desktop modules in its NixOS subset), so
-  # without this stub the build fails with "option does not exist".
-  options.services.displayManager.hiddenUsers = lib.mkOption {
-    type = lib.types.listOf lib.types.str;
-    internal = true;
-    default = [ ];
-  };
-
-  # Same reason as above: nix.nix also reads `programs.bash.completion.enable`
-  # to decide whether to add nix-bash-completions, but system-manager doesn't
-  # import the module that declares `programs.bash`.
-  options.programs.bash.completion.enable = lib.mkOption {
-    type = lib.types.bool;
-    internal = true;
-    default = false;
-  };
-
   # system-manager's own nix/modules/upstream/nixpkgs/nix.nix hand-declares
   # `nix.enable`/`nix.package` as a stand-in for the real nix-daemon module.
   # Since nixpkgs commit 3a84c13b4 (2026-06-12), nixpkgs' own

@@ -12,6 +12,10 @@
     try.url = "github:tobi/try";
     try.inputs.nixpkgs.follows = "nixpkgs";
 
+    hermes-agent.url = "github:NousResearch/hermes-agent";
+    hermes-agent.inputs.nixpkgs.follows = "nixpkgs";
+    hermes-agent.inputs.home-manager.follows = "home-manager";
+
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
