@@ -8,6 +8,7 @@
         disable = [
           "claude_code"
           "gcloud"
+          "pi"
           "tmux"
           "uv"
         ];
