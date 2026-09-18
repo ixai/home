@@ -20,7 +20,7 @@
 
   home.packages = [
     pkgs._1password-gui
-    pkgs.keybase-gui
+    # pkgs.keybase-gui
     pkgs.dos2unix
   ];
 
