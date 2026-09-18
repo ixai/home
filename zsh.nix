@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -6,11 +6,19 @@
     defaultKeymap = "viins";
     setOptions = [ "EXTENDED_GLOB" ];
     dotDir = "${config.xdg.configHome}/zsh";
-    initContent = ''
-      unsetopt beep
-      zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
-      eval "$(try init ~/src/tries)"
-    '';
+    initContent = lib.mkMerge [
+      # Must run before antidote loads plugins (mkOrder 560): the
+      # getantidote/use-omz plugin sources omz's check_for_upgrade.sh as soon
+      # as it loads, and topgrade already keeps everything updated.
+      (lib.mkOrder 500 ''
+        export DISABLE_AUTO_UPDATE=true
+      '')
+      ''
+        unsetopt beep
+        zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+        eval "$(try init ~/src/tries)"
+      ''
+    ];
 
     history = {
       path = "$ZDOTDIR/.zhistory";
