@@ -5,6 +5,11 @@
   # both evaluate the same modules with the same arguments.
   home-manager = {
     extraSpecialArgs = homeArgs;
+
+    # Activation refuses to replace a path home-manager does not already own,
+    # which includes output its own earlier generations wrote in a different
+    # shape. Move those aside instead of failing the switch.
+    backupFileExtension = "nix-darwin-home-manager-backup";
     users.ixai.imports = [
       ./common.nix
       ./darwin.nix
