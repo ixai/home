@@ -13,7 +13,7 @@
       keybind = "shift+enter=text:\\n";
       mouse-hide-while-typing = true;
       shell-integration = "zsh";
-      theme = "Catppuccin Latte";
+      theme = "Catppuccin Frappe";
     };
   };
 }

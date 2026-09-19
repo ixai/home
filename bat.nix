@@ -1,6 +1,6 @@
 {
   programs.bat = {
     enable = true;
-    config.theme = "Catppuccin Latte";
+    config.theme = "Catppuccin Frappe";
   };
 }
