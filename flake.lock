@@ -1,19 +1,60 @@
 {
   "nodes": {
-    "root": {
+    "dank-qml-common": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789924572,
+        "narHash": "sha256-0zO+HFepbuUBedfE+FRoQ9XVFqsK9sXcqBU6NoAnlPQ=",
+        "owner": "AvengeMedia",
+        "repo": "dank-qml-common",
+        "rev": "08f2850f457c36585700fea489f3403389537faf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "dank-qml-common",
+        "type": "github"
+      }
+    },
+    "dms": {
       "inputs": {
-        "hermes-agent": "hermes-agent",
-        "home-manager": "home-manager",
-        "niri": "niri",
-        "nix-darwin": "nix-darwin",
-        "nix-system-graphics": "nix-system-graphics",
-        "nixpkgs": "nixpkgs",
-        "system-manager": "system-manager",
-        "treefmt-nix": "treefmt-nix",
-        "try": "try"
+        "dank-qml-common": "dank-qml-common",
+        "flake-compat": "flake-compat",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789940589,
+        "narHash": "sha256-5eVV4jq4zJULr7G5chY09pvCE9+BVJ3gzYqQBOk3qVY=",
+        "owner": "AvengeMedia",
+        "repo": "DankMaterialShell",
+        "rev": "2486adb226911f4fbd826be5bacb3baa6c663985",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "DankMaterialShell",
+        "type": "github"
       }
     },
     "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_2": {
       "flake": false,
       "locked": {
         "lastModified": 1767039857,
@@ -352,9 +393,23 @@
         "type": "github"
       }
     },
+    "root": {
+      "inputs": {
+        "dms": "dms",
+        "hermes-agent": "hermes-agent",
+        "home-manager": "home-manager",
+        "niri": "niri",
+        "nix-darwin": "nix-darwin",
+        "nix-system-graphics": "nix-system-graphics",
+        "nixpkgs": "nixpkgs",
+        "system-manager": "system-manager",
+        "treefmt-nix": "treefmt-nix",
+        "try": "try"
+      }
+    },
     "system-manager": {
       "inputs": {
-        "flake-compat": "flake-compat",
+        "flake-compat": "flake-compat_2",
         "nixpkgs": [
           "nixpkgs"
         ],

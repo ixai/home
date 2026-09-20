@@ -354,12 +354,6 @@
         { include._args = [ "dms/layout.kdl" ]; }
         { include._args = [ "dms/alttab.kdl" ]; }
         { include._args = [ "dms/binds.kdl" ]; }
-        {
-          spawn-at-startup = [
-            "dms"
-            "run"
-          ];
-        }
         { include._args = [ "dms/cursor.kdl" ]; }
       ];
     };

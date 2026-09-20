@@ -8,6 +8,7 @@
 
 {
   imports = [
+    inputs.dms.homeModules.dank-material-shell
     inputs.hermes-agent.homeManagerModules.default
     ./hermes-agent.nix
     ./niri.nix
@@ -26,6 +27,11 @@
     # pkgs.keybase-gui
     pkgs.dos2unix
   ];
+
+  programs.dank-material-shell = {
+    enable = true;
+    systemd.enable = true;
+  };
 
   programs.chromium.enable = true;
 
