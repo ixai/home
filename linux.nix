@@ -12,6 +12,7 @@
     inputs.hermes-agent.homeManagerModules.default
     ./hermes-agent.nix
     ./niri.nix
+    # ./power.nix
   ];
 
   home.username = "ixai";
@@ -45,7 +46,7 @@
 
     profileExtra = ''
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
-      if uwsm check may-start && uwsm select; then
+      if uwsm check may-start; then
           exec uwsm start default
       fi
     '';
