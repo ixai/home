@@ -10,9 +10,10 @@
   imports = [
     inputs.dms.homeModules.dank-material-shell
     inputs.hermes-agent.homeManagerModules.default
+    inputs.stasis.homeModules.default
     ./hermes-agent.nix
     ./niri.nix
-    # ./power.nix
+    ./power.nix
   ];
 
   home.username = "ixai";

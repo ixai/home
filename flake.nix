@@ -22,6 +22,11 @@
     niri.url = "github:niri-wm/niri";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
+    stasis = {
+      url = "github:saltnpepper97/stasis";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
