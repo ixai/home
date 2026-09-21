@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = [ ./dms-greeter.nix ];
+
   # system-manager's own nix/modules/upstream/nixpkgs/nix.nix hand-declares
   # `nix.enable`/`nix.package` as a stand-in for the real nix-daemon module.
   # Since nixpkgs commit 3a84c13b4 (2026-06-12), nixpkgs' own
