@@ -88,8 +88,14 @@
           spawn = [ "fuzzel" ];
         };
         "Super+Alt+L" = {
-          _props.hotkey-overlay-title = "Lock the Screen: swaylock";
-          spawn = [ "swaylock" ];
+          _props.hotkey-overlay-title = "Lock the Screen: DMS";
+          spawn = [
+            "dms"
+            "ipc"
+            "call"
+            "lock"
+            "lock"
+          ];
         };
         "Super+Alt+S" = {
           _props = {

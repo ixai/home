@@ -41,6 +41,13 @@
       ];
     };
 
+    security.wrappers.unix_chkpwd = {
+      source = "${pkgs.linux-pam}/bin/unix_chkpwd";
+      owner = "root";
+      group = "root";
+      setuid = true;
+    };
+
     system-graphics = {
       enable = true;
       extraPackages = with pkgs.rocmPackages; [
@@ -69,6 +76,28 @@
       # Add directories and files to `/etc` and set their permissions
       etc = {
         "nix/nix.conf".replaceExisting = true;
+
+        "pam.d/dankshell" = {
+          mode = "0644";
+          replaceExisting = true;
+          text = ''
+            #%PAM-1.0
+            auth       required   pam_shells.so
+            auth       requisite  pam_nologin.so
+            auth       include     system-auth
+
+            account    required   pam_access.so
+            account    required   pam_nologin.so
+            account    include     system-auth
+
+            password   include     system-auth
+
+            session    optional   pam_loginuid.so
+            session    optional   pam_keyinit.so force revoke
+            session    include     system-auth
+            session    required   pam_env.so
+          '';
+        };
 
         # with_ownership = {
         #   text = ''
