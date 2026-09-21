@@ -23,7 +23,8 @@ let
 
     exec ${dmsGreeter}/bin/dms-greeter \
       --cache-dir /var/lib/dms-greeter \
-      --command niri
+      --command niri \
+      --remember-last-user true
   '';
 
   syncDmsGreeter = pkgs.writeShellScript "sync-dms-greeter" ''
