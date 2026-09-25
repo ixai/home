@@ -16,6 +16,9 @@
     hermes-agent.inputs.nixpkgs.follows = "nixpkgs";
     hermes-agent.inputs.home-manager.follows = "home-manager";
 
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    llm-agents.inputs.nixpkgs.follows = "nixpkgs";
+
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
