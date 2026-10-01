@@ -18,6 +18,12 @@
 
   users.users.ixai.home = "/Users/ixai";
 
+  # home-manager's .zshrc runs compinit after plugins extend fpath. A second
+  # compinit from /etc/zshrc sees a different fpath, so each one invalidates
+  # the other's .zcompdump and every shell rebuilds it (seconds per startup).
+  programs.zsh.enableCompletion = false;
+  programs.zsh.enableBashCompletion = false;
+
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   # Manage /etc/nix/nix.conf (system-level). nix-darwin generates the *whole*
