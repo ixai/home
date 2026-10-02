@@ -113,7 +113,13 @@ in
   programs.htop.enable = true;
   programs.jq.enable = true;
   programs.ripgrep.enable = true;
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    settings = {
+      aws.disabled = true;
+      gcloud.disabled = true;
+    };
+  };
   programs.zoxide.enable = true;
   xdg.enable = true;
 }
