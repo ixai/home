@@ -9,19 +9,28 @@ SYSTEM_PROFILES := /nix/var/nix/profiles
 
 .PHONY: help build build/home-manager build/nix-darwin build/system-manager
 .PHONY: switch switch/home-manager switch/nix-darwin switch/system-manager
-.PHONY: fmt update check generations
+.PHONY: fmt update update/all check check/inputs generations
 .PHONY: clean clean/generations clean/generations/dry-run clean/store clean/cache optimise
+
+# Flake inputs grouped by the host that consumes them. `update` only touches
+# the inputs this host uses; `check/inputs` fails when flake.nix declares an
+# input that is missing from every list.
+COMMON_INPUTS := nixpkgs home-manager try llm-agents treefmt-nix
+DARWIN_INPUTS := nix-darwin
+LINUX_INPUTS := hermes-agent niri stasis dms dank-greeter system-manager nix-system-graphics
 
 ifeq ($(shell uname -s),Darwin)
 # home-manager activates as a nix-darwin module here, so one darwin-rebuild
 # run covers both layers.
 BUILD_LAYERS := build/nix-darwin
 SWITCH_LAYERS := switch/nix-darwin
+HOST_INPUTS := $(COMMON_INPUTS) $(DARWIN_INPUTS)
 else
 # system-manager only applies to the Linux host (system.nix pins
 # nixpkgs.hostPlatform to x86_64-linux).
 BUILD_LAYERS := build/home-manager build/system-manager
 SWITCH_LAYERS := switch/home-manager switch/system-manager
+HOST_INPUTS := $(COMMON_INPUTS) $(LINUX_INPUTS)
 endif
 
 help: ## Show this help
@@ -54,11 +63,26 @@ switch/system-manager: ## Activate the system-manager configuration (sudo)
 fmt: ## Format the nix files
 	nix fmt
 
-update: ## Update the flake inputs
+update: ## Update the flake inputs this host uses
+	nix flake update $(HOST_INPUTS)
+
+update/all: ## Update every flake input
 	nix flake update
 
-check: ## Run the flake checks
+check: check/inputs ## Run the flake checks
 	nix flake check
+
+check/inputs: ## Fail when a flake input is in no Makefile input list
+	@status=0; \
+	declared=$$(nix flake metadata --json | jq --raw-output '.locks.nodes.root.inputs | keys[]' | tr '\n' ' '); \
+	listed='$(COMMON_INPUTS) $(DARWIN_INPUTS) $(LINUX_INPUTS)'; \
+	for i in $$declared; do \
+	  case " $$listed " in *" $$i "*) ;; *) echo "flake input not in any Makefile list: $$i"; status=1;; esac; \
+	done; \
+	for i in $$listed; do \
+	  case " $$declared " in *" $$i "*) ;; *) echo "Makefile lists an input not in flake.nix: $$i"; status=1;; esac; \
+	done; \
+	exit $$status
 
 generations: ## List user and system profile generations
 	@for p in $(USER_PROFILES)/*; do \
