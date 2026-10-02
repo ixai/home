@@ -5,9 +5,7 @@
     "pr": "",
     "sessionUrl": false
   },
-  "awaySummaryEnabled": false,
-  "effortLevel": "high",
-  "model": "opus",
+  "model": "fable",
   "skillOverrides": {
     "twg": "user-invocable-only",
     "twg-agentic-search": "off",
@@ -24,8 +22,10 @@
     "twg-status-rollups": "off"
   },
   "statusLine": {
-    "command": "~/.claude/scripts/statusline.sh",
-    "type": "command"
+    "type": "command",
+    "command": "~/.claude/scripts/statusline.sh"
   },
+  "effortLevel": "high",
+  "awaySummaryEnabled": false,
   "theme": "dark-ansi"
 }
