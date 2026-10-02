@@ -14,6 +14,7 @@ let
     export STARSHIP_SHELL=
     "$starship" module directory --path "$dir"
     "$starship" module git_branch --path "$dir"
+    "$starship" module git_status --path "$dir"
   '';
 
   # Claude Code writes to its settings and agents (`/config`, `/agents`,
