@@ -15,6 +15,12 @@ let
     "$starship" module directory --path "$dir"
     "$starship" module git_branch --path "$dir"
   '';
+
+  # Claude Code writes to its settings and agents (`/config`, `/agents`,
+  # permission grants), so these link to the working copy of this repository,
+  # not to a read-only store path. Claude's changes then show up in `git diff`.
+  repo = "${config.xdg.configHome}/home-manager";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${repo}/${path}";
 in
 {
   programs.claude-code = {
@@ -31,46 +37,15 @@ in
       };
     };
 
-    settings = {
-      attribution = {
-        commit = "";
-        pr = "";
-        sessionUrl = false;
-      };
-      model = "opus";
-      effortLevel = "high";
-      theme = "dark-ansi";
-      awaySummaryEnabled = false;
-      statusLine = {
-        type = "command";
-        command = "${statusline}";
-      };
-      # The twg (Teamwork Graph) CLI installs its skills into ~/.claude/skills.
-      # Jira is the only Atlassian product in use, so the main agent never
-      # needs them; the typhon agent reads the twg and twg-jira SKILL.md files
-      # itself. `user-invocable-only` keeps `/twg` available at the prompt.
-      skillOverrides = {
-        twg = "user-invocable-only";
-        twg-jira = "user-invocable-only";
-        twg-agentic-search = "off";
-        twg-artifacts = "off";
-        twg-code-review = "off";
-        twg-confluence = "off";
-        twg-context-discovery = "off";
-        twg-engineering-work = "off";
-        twg-jira-resolve-merged-work = "off";
-        twg-operational-health = "off";
-        twg-responsibility-routing = "off";
-        twg-space-creation = "off";
-        twg-status-rollups = "off";
-      };
-    };
-
-    agents = {
-      typhon = ./config/claude-code/agents/typhon.md;
-      scribe = ./config/claude-code/agents/scribe.md;
-    };
-
     context = ./config/agents/AGENTS.md;
+  };
+
+  # settings.json disables most twg (Teamwork Graph) skills: Jira is the only
+  # Atlassian product in use, and the typhon agent reads the twg and twg-jira
+  # SKILL.md files itself. `user-invocable-only` keeps `/twg` at the prompt.
+  home.file = {
+    ".claude/settings.json".source = link "config/claude-code/settings.json";
+    ".claude/agents".source = link "config/claude-code/agents";
+    ".claude/scripts/statusline.sh".source = statusline;
   };
 }

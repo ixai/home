@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "awaySummaryEnabled": false,
+  "effortLevel": "high",
+  "model": "opus",
+  "skillOverrides": {
+    "twg": "user-invocable-only",
+    "twg-agentic-search": "off",
+    "twg-artifacts": "off",
+    "twg-code-review": "off",
+    "twg-confluence": "off",
+    "twg-context-discovery": "off",
+    "twg-engineering-work": "off",
+    "twg-jira": "user-invocable-only",
+    "twg-jira-resolve-merged-work": "off",
+    "twg-operational-health": "off",
+    "twg-responsibility-routing": "off",
+    "twg-space-creation": "off",
+    "twg-status-rollups": "off"
+  },
+  "statusLine": {
+    "command": "~/.claude/scripts/statusline.sh",
+    "type": "command"
+  },
+  "theme": "dark-ansi"
+}
