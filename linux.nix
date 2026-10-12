@@ -16,6 +16,8 @@
     ./power.nix
   ];
 
+  home.backupFileExtension = "hm-backup";
+
   home.username = "ixai";
   home.homeDirectory = "/home/ixai";
 
