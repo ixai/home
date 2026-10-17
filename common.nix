@@ -34,6 +34,7 @@ in
       "claude-code"
       "obsidian"
       "terraform"
+      "todoist-electron"
       "vscode"
     ]
   );

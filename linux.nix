@@ -30,6 +30,7 @@
     pkgs._1password-gui
     # pkgs.keybase-gui
     pkgs.dos2unix
+    pkgs.todoist-electron
   ];
 
   programs.dank-material-shell = {
